@@ -1,0 +1,45 @@
+
+<h2>Photo</h2>
+
+<div class="float-right" style="padding-left: 1200px; padding-top: 20px;">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+       <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Make this
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" (click)="makeProfilePhoto">Profile Photo</a>
+            <a class="dropdown-item" (click)="makeCoverPhoto">Album Cover</a>
+          </div>
+        </div>
+      </div>
+</div><br>
+
+<div style="width: 450px; margin:auto;" *ngIf="photo">
+
+    <img [src]="photo.photoUrl" class="rounded" width="450px"/>
+
+</div>
+<br>
+
+<h3>Comments:</h3>
+
+<div style="width: 600px;  margin: auto;">
+  <div class="form-group">
+    <textarea class="form-control" rows="3" [(ngModel)]="newComment"></textarea>
+  </div>
+
+  <div class="float-right" style="padding-left: 1200px; padding-top: 20px;">
+    <button type="button" class="btn btn-primary" [disabled]="!newComment" (click)="saveComment()">Post Comment</button>
+  </div>
+  <br/><br/><br/>
+
+  <div *ngIf="allComments">
+    <div class="float-right" style="padding-left: 1200px; padding-top: 20px;">
+      <button type="button" class="btn btn-primary" (click)="changeOrder(photoId)">Change Order</button>
+    </div>
+    <div class="alert alert-primary" style="text-align: right;" role="alert" *ngFor="let comment of allComments">    
+      {{comment.message}} -- {{comment.createdBy}} on {{comment.dateCreated}}
+    </div>
+  </div>
+</div>
